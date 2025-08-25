@@ -1,0 +1,94 @@
+/* Custom styles not easily done with Tailwind */
+/*
+This CSS file is for custom styles or for specific behaviors not directly covered by utility classes.
+Since the original React code uses Tailwind, we will rely on the Tailwind CDN for most styles.
+*/
+
+:root {
+  --color-dark-bg: #111827;
+  --color-dark-text: #ffffff;
+  --color-dark-surface: #1f2937;
+  --color-dark-border: #374151;
+  --color-dark-hover: #1f2937;
+}
+
+body.dark-mode {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+}
+
+body.dark-mode .bg-gray-50 {
+  background-color: var(--color-dark-surface);
+}
+
+body.dark-mode .bg-white {
+  background-color: var(--color-dark-surface);
+}
+
+body.dark-mode .border-gray-200 {
+  border-color: var(--color-dark-border);
+}
+
+body.dark-mode .bg-gray-100 {
+  background-color: var(--color-dark-surface);
+}
+
+body.dark-mode .bg-gray-100:hover {
+  background-color: #374151;
+}
+
+body.dark-mode .text-gray-600 {
+  color: #d1d5db; /* A lighter gray for dark mode */
+}
+
+body.dark-mode .text-gray-900 {
+  color: var(--color-dark-text);
+}
+
+body.dark-mode .text-gray-300 {
+  color: #9ca3af; /* Darker gray for dark mode */
+}
+
+body.dark-mode .bg-white\/95 {
+  background-color: rgba(31, 41, 55, 0.95);
+}
+
+body.dark-mode #main-header {
+  background-color: var(--color-dark-surface);
+  border-color: var(--color-dark-border);
+}
+
+body.dark-mode .text-gray-500 {
+  color: #9ca3af;
+}
+
+body.dark-mode .hover\:text-gray-900:hover {
+  color: var(--color-dark-text);
+}
+
+body.dark-mode .bg-yellow-100 {
+  background-color: #6d5b00;
+  color: #fff1c7;
+}
+
+body.dark-mode .bg-green-100 {
+  background-color: #0c4228;
+  color: #d1fae5;
+}
+
+body.dark-mode .bg-blue-100 {
+  background-color: #1e3a8a;
+  color: #bfdbfe;
+}
+
+/* Animations for testimonial transition */
+.testimonial-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.testimonial-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}

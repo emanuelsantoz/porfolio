@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emanuel Santos - Portfólio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/brands.min.css">
+</head>
+
+<body class="bg-white text-gray-900 transition-colors duration-300">
+
+    <header id="main-header"
+        class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 bg-white/95 backdrop-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-xl font-bold text-blue-600">
+                    Emanuel<span class="text-red-500">.</span>dev
+                </div>
+
+                <nav class="hidden md:flex space-x-8" id="desktop-nav">
+                    <button class="capitalize transition-colors duration-200 text-blue-600"
+                        data-section="about">Sobre</button>
+                    <button class="capitalize transition-colors duration-200 text-gray-600 hover:text-gray-900"
+                        data-section="projects">Projetos</button>
+                    <button class="capitalize transition-colors duration-200 text-gray-600 hover:text-gray-900"
+                        data-section="services">Serviços</button>
+                    <button class="capitalize transition-colors duration-200 text-gray-600 hover:text-gray-900"
+                        data-section="timeline">Trajetória</button>
+                    <button class="capitalize transition-colors duration-200 text-gray-600 hover:text-gray-900"
+                        data-section="testimonials">Depoimentos</button>
+                    <button class="capitalize transition-colors duration-200 text-gray-600 hover:text-gray-900"
+                        data-section="contact">Contato</button>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg transition-colors bg-gray-100 hover:bg-gray-200">
+                        <span id="theme-icon-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg transition-colors">
+                        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                            <line x1="4" x2="20" y1="12" y2="12"></line>
+                            <line x1="4" x2="20" y1="6" y2="6"></line>
+                            <line x1="4" x2="20" y1="18" y2="18"></line>
+                        </svg>
+                        <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 hidden">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-2">
+                <button class="block w-full text-left py-2 px-3 rounded transition-colors text-blue-600 bg-blue-50"
+                    data-section="about">Sobre mim</button>
+                <button
+                    class="block w-full text-left py-2 px-3 rounded transition-colors text-gray-600 hover:bg-gray-50"
+                    data-section="projects">Projetos</button>
+                <button
+                    class="block w-full text-left py-2 px-3 rounded transition-colors text-gray-600 hover:bg-gray-50"
+                    data-section="services">Serviços</button>
+                <button
+                    class="block w-full text-left py-2 px-3 rounded transition-colors text-gray-600 hover:bg-gray-50"
+                    data-section="timeline">Trajetória</button>
+                <button
+                    class="block w-full text-left py-2 px-3 rounded transition-colors text-gray-600 hover:bg-gray-50"
+                    data-section="testimonials">Depoimentos</button>
+                <button
+                    class="block w-full text-left py-2 px-3 rounded transition-colors text-gray-600 hover:bg-gray-50"
+                    data-section="contact">Contato</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="about" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <div class="inline-block p-1 bg-gradient-to-r from-blue-600 to-red-500 rounded-full mb-8"
+                        id="foto-logo-emanuel">
+
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        Emanuel Santos<br />
+                        <span class="bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent">
+                            Desenvolvedor Full-Stack
+                        </span>
+                    </h1>
+                    <p class="text-xl mb-8 max-w-3xl mx-auto text-gray-600">
+                        Desenvolvedor apaixonado por tecnologia com foco em wireframes, testes e engenharia de software.
+                        Especializado em C#/.NET, Angular, Flutter e testes automatizados. Atualmente Analista Jr. na
+                        Cooperativa Barracred.
+                    </p>
+                    <div class="flex justify-center space-x-6">
+
+
+                        <a href="https://github.com/emanuelsantoz" target="_blank" rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-700 transition-colors">
+                            <i class="fa-lg fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/emanu-ell/" target="_blank" rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-700 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-6 h-6">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="mailto:emanuelsantossouzajesus@gmail.com"
+                            class="text-blue-600 hover:text-blue-700 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-6 h-6">
+                                <path
+                                    d="M4 4h16c1.1 0 2 0.9 2 2v12c0 1.1-0.9 2-2 2H4c-1.1 0-2-0.9-2-2V6c0-1.1 0.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6 mb-16">
+                    <div class="text-center p-6 rounded-lg bg-gray-50">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">19</div>
+                        <div class="text-sm uppercase tracking-wide">Anos de Idade</div>
+                    </div>
+                    <div class="text-center p-6 rounded-lg bg-gray-50">
+                        <div class="text-3xl font-bold text-red-500 mb-2">2+</div>
+                        <div class="text-sm uppercase tracking-wide">Anos de Experiência</div>
+                    </div>
+                    <div class="text-center p-6 rounded-lg bg-gray-50">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">8+</div>
+                        <div class="text-sm uppercase tracking-wide">Tecnologias</div>
+                    </div>
+                    <div class="text-center p-6 rounded-lg bg-gray-50">
+                        <div class="text-3xl font-bold text-red-500 mb-2">6+</div>
+                        <div class="text-sm uppercase tracking-wide">Projetos</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Projetos</h2>
+                    <p class="text-lg text-gray-600">
+                        Showcase dos meus principais trabalhos divididos por categoria
+                    </p>
+                </div>
+
+                <div id="projects-container"></div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Serviços</h2>
+                    <p class="text-lg text-gray-600">
+                        Soluções tecnológicas completas para seu negócio
+                    </p>
+                </div>
+
+                <div id="services-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+            </div>
+        </section>
+
+        <section id="timeline" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Trajetória</h2>
+                    <p class="text-lg text-gray-600">
+                        Minha jornada acadêmica e profissional
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-8 text-center text-blue-600">Formação Acadêmica</h3>
+                        <div id="education-timeline" class="space-y-8">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold mb-8 text-center text-red-500">Trajetória Profissional</h3>
+                        <div id="professional-timeline" class="space-y-8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Depoimentos</h2>
+                    <p class="text-lg text-gray-600">
+                        O que dizem sobre meu trabalho
+                    </p>
+                </div>
+
+                <div class="relative max-w-4xl mx-auto">
+                    <div id="testimonial-card"
+                        class="p-8 rounded-lg bg-gray-50 text-center transition-all duration-500">
+                    </div>
+
+                    <div class="flex justify-center space-x-4 mt-8">
+                        <button id="prev-testimonial"
+                            class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-5 h-5">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button id="next-testimonial"
+                            class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-5 h-5">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="testimonial-indicators" class="flex justify-center space-x-2 mt-4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Contato</h2>
+                    <p class="text-lg text-gray-600">
+                        Vamos conversar sobre seu próximo projeto
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <div>
+                        <h3 class="text-xl font-bold mb-6">Entre em contato</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-5 h-5 mr-3 text-blue-600">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 0.9 2 2v12c0 1.1-0.9 2-2 2H4c-1.1 0-2-0.9-2-2V6c0-1.1 0.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                <span>emanuelsantossouzajesus@gmail.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-5 h-5 mr-3 text-blue-600">
+                                    <path
+                                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3.5-0.4 7.2-2.1 7.2-7.8a5.5 5.5 0 0 0-1.5-3.8 5.5 5.5 0 0 0-2.3-1.8c-0.8-0.2-1.6-0.3-2.4-0.3-0.8 0-1.6 0.1-2.4 0.3a5.5 5.5 0 0 0-2.3 1.8 5.5 5.5 0 0 0-1.5 3.8c0 5.7 3.7 7.4 7.2 7.8a4.8 4.8 0 0 0-1 3.2v4">
+                                    </path>
+                                </svg>
+                                <span>github.com/emanu-ell</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-5 h-5 mr-3 text-blue-600">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z">
+                                    </path>
+                                </svg>
+                                <span>linkedin.com/in/emanu-ell</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <button id="download-cv-btn"
+                                class="flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-5 h-5 mr-2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                                </svg>
+                                Baixar Currículo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-6">Envie uma mensagem</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <input type="text" placeholder="Seu nome"
+                                class="w-full p-3 rounded-lg border bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                            <input type="email" placeholder="Seu email"
+                                class="w-full p-3 rounded-lg border bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                            <textarea rows="4" placeholder="Sua mensagem"
+                                class="w-full p-3 rounded-lg border bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+                            <button type="submit"
+                                class="w-full py-3 bg-gradient-to-r from-blue-600 to-red-500 text-white rounded-lg hover:from-blue-700 hover:to-red-600 transition-colors">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="email-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="p-8 rounded-lg max-w-md w-full mx-4 bg-white">
+            <h3 class="text-xl font-bold mb-4">Baixar Currículo</h3>
+            <p class="mb-4 text-gray-600">
+                Para baixar o currículo, por favor informe seu email:
+            </p>
+            <form id="email-form">
+                <input type="email" placeholder="Seu email" id="email-input"
+                    class="w-full p-3 rounded-lg border mb-4 bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    required />
+                <div class="flex space-x-4">
+                    <button type="button" id="cancel-modal"
+                        class="flex-1 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="flex-1 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Baixar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
