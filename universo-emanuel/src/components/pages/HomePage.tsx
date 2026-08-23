@@ -1,166 +1,200 @@
-"use client";
+import Image from "next/image";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { HomeHero } from "@/components/pages/HomeHero";
+import { CreationLenses } from "@/components/pages/CreationLenses";
 
-import { useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { usePersonaStore } from "@/core/store/personaStore";
-import { PersonaType } from "@/core/types/persona";
-import { PERSONAS } from "@/core/personas/personas";
-import { motion } from "framer-motion";
-import { Brain, Bug, Code, Cpu, Database, Palette, Smartphone, Terminal } from "lucide-react";
+const projects = [
+  {
+    number: "01",
+    title: "Rotas Inteligentes",
+    summary: "Mobilidade urbana com mais clareza, contexto e possibilidades de escolha.",
+    description:
+      "Um projeto autoral criado para transformar dúvidas comuns de deslocamento em uma experiência simples de consultar, comparar e organizar trajetos.",
+    role: "Conceito, pesquisa, experiência e protótipo por Emanuel Santos.",
+    href: "https://www.figma.com/proto/p2nGg4cLvSvimsAAhEkviB/Rotas-Inteligentes?node-id=214-1010&starting-point-node-id=214%3A1010",
+    image: "/images/rotas-inteligentes.png",
+    featured: true,
+  },
+  {
+    number: "02",
+    title: "Creative Lab",
+    summary: "Uma casa para que projetos acadêmicos continuem visíveis depois da apresentação.",
+    description:
+      "Produto digital para receber, organizar, avaliar e publicar a produção acadêmica com contexto para estudantes, docentes e instituições.",
+    role: "Estratégia de produto, identidade, experiência e desenvolvimento.",
+    href: "#contact",
+    image: "/images/creative-lab.png",
+    featured: false,
+  },
+  {
+    number: "03",
+    title: "Fince",
+    summary: "Uma experiência financeira pessoal feita para reduzir ruído e apoiar decisões.",
+    description:
+      "Protótipo de gestão financeira que explora visualização de dados, organização de gastos, investimentos e metas em uma interface clara.",
+    role: "UX/UI, arquitetura da informação e prototipagem.",
+    href: "https://www.figma.com/proto/2y4ZguUBWlXnD2smvVHWTR/Fince?node-id=2762-1833&t=dKDqNAVuE4h8a7lr-0&scaling=scale-down&content-scaling=fixed&page-id=8%3A4",
+    featured: false,
+  },
+];
 
-import { Navbar } from "@/components/organisms/Navbar";
-import { HeroSection } from "@/components/organisms/HeroSection";
-import { AboutSection } from "@/components/organisms/AboutSection";
-import { SkillsSection } from "@/components/organisms/SkillsSection";
-import { ProjectsSection } from "@/components/organisms/ProjectsSection";
-import { ContactSection } from "@/components/organisms/ContactSection";
+const timeline = [
+  ["2023–2024", "Formação Barracred Conecta", "O início de uma vivência prática em tecnologia, segurança e desenvolvimento."],
+  ["2024–2025", "Jovem Aprendiz em TI", "Suporte, documentação, gestão de acessos e a construção de uma base profissional."],
+  ["2025–hoje", "Analista de Desenvolvimento Jr.", "Atuação em sistemas internos, melhoria contínua e soluções que atendem pessoas reais."],
+];
 
-const iconByPersona: Record<PersonaType, any> = {
-  fullstack: Code,
-  "ux-ui": Palette,
-  mobile: Smartphone,
-  backend: Terminal,
-  qa: Bug,
-  automation: Cpu,
-  data: Database,
-  ai: Brain,
-};
-
-export function HomePage({ initialPersona }: { initialPersona?: PersonaType }) {
-  const router = useRouter();
-  const { activePersona, setPersona } = usePersonaStore();
-
-  useEffect(() => {
-    if (!initialPersona) return;
-    setPersona(initialPersona);
-  }, [initialPersona, setPersona]);
-
-  const personas = useMemo(() => {
-    return PERSONAS.map((p) => ({
-      ...p,
-      icon: iconByPersona[p.id],
-    }));
-  }, []);
-
-  const onSelectPersona = (persona: PersonaType) => {
-    setPersona(persona);
-    if (persona === "fullstack") {
-      router.push("/");
-      return;
-    }
-    router.push(`/p/${persona}`);
-  };
-
+export function HomePage(_: { initialPersona?: string } = {}) {
   return (
-    <>
-      <Navbar />
-      <main className="flex min-h-screen flex-col items-center justify-start relative">
-        <HeroSection />
+    <main className="bg-[#f8f7f3] text-[#07111f]">
+      <HomeHero />
 
-        <AboutSection />
-
-        <SkillsSection />
-
-        <div className="container mx-auto px-4 py-8">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center space-y-4 mb-8"
-          >
-            <p className="text-xl text-muted-foreground">Selecione um modo para explorar o universo:</p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {personas.map((persona) => {
-              const Icon = persona.icon;
-              const isActive = activePersona === persona.id;
-
-              return (
-                <motion.button
-                  key={persona.id}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => onSelectPersona(persona.id)}
-                  className={`
-                    flex flex-col items-center justify-center p-6 rounded-xl border transition-all
-                    ${
-                      isActive
-                        ? "bg-primary text-primary-foreground border-primary shadow-lg ring-2 ring-offset-2"
-                        : "bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground"
-                    }
-                  `}
-                >
-                  <Icon className="w-8 h-8 mb-2" />
-                  <span className="text-sm font-medium">{persona.label}</span>
-                </motion.button>
-              );
-            })}
+      <section id="historia" className="px-6 py-24 lg:px-10 lg:py-32">
+        <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="absolute -left-5 -top-5 h-full w-full rounded-[2rem] border border-[#2166c9]/20" />
+            <Image
+              src="/images/emanuel-at-work.jpeg"
+              alt="Emanuel Santos trabalhando em um produto digital"
+              width={1200}
+              height={1600}
+              sizes="(max-width: 1024px) 85vw, 36vw"
+              className="relative aspect-[4/5] w-full rounded-[2rem] object-cover"
+            />
           </div>
-
-          <div className="mt-12 p-8 border rounded-lg max-w-2xl mx-auto bg-background/50 backdrop-blur">
-            <h2 className="text-2xl font-bold mb-4">Contexto do Universo</h2>
-            {activePersona === "fullstack" && (
-              <p>Olá! Sou um desenvolvedor Fullstack focado em soluções robustas. Explore os outros modos para ver minhas habilidades específicas.</p>
-            )}
-            {activePersona === "backend" && (
-              <p className="font-mono text-green-500">
-                &gt; System.init(Backend_Architecture);<br />
-                &gt; Loading microservices...<br />
-                &gt; Connection established.<br />
-                Aqui o foco é performance, arquitetura limpa e código sólido.
-              </p>
-            )}
-            {activePersona === "ux-ui" && (
-              <p className="font-handwriting text-lg" style={{ fontFamily: "var(--font-patrick)" }}>
-                Design não é apenas como se parece, é como funciona. <br />
-                Vamos criar experiências memoráveis juntos?
-              </p>
-            )}
-            {activePersona === "mobile" && (
-              <div className="text-center space-y-4">
-                <p className="text-lg">📱 Mobile First</p>
-                <p className="text-sm opacity-70">
-                  O layout mudou para simular um dispositivo móvel.
-                  <br />
-                  Desenvolvimento em Flutter, iOS e Android.
-                </p>
-              </div>
-            )}
-            {activePersona === "qa" && (
-              <div className="space-y-2">
-                <p className="text-green-600 font-bold">✓ 124 Tests Passed</p>
-                <p className="text-red-500 font-bold">⚠ 1 Bug Detected</p>
-                <p className="text-sm">Qualidade de software é inegociável. Testes E2E, Unitários e de Integração.</p>
-              </div>
-            )}
-            {activePersona === "automation" && (
-              <div className="font-mono text-xs p-4 bg-black/80 rounded border border-gray-700 text-blue-400">
-                [PIPELINE] Building... 100%<br />
-                [DEPLOY] Production... SUCCESS<br />
-                Automação de processos e CI/CD.
-              </div>
-            )}
-            {activePersona === "data" && (
-              <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                <div className="p-2 border border-primary/20 bg-primary/5">SELECT * FROM skills;</div>
-                <div className="p-2 border border-primary/20 bg-primary/5">WHERE experience &gt; 4;</div>
-                <p className="col-span-2 text-center mt-2">SQL Server, Oracle, MongoDB</p>
-              </div>
-            )}
-            {activePersona === "ai" && (
-              <div className="border-l-4 border-purple-500 pl-4 italic">
-                &quot;A IA não vai te substituir. Um humano usando IA vai.&quot;
-                <br />
-                <span className="text-sm not-italic opacity-70">- Integração com LLMs e Prompt Engineering</span>
-              </div>
-            )}
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#2166c9]">Por trás do produto</p>
+            <h2 className="mt-5 max-w-3xl font-[family-name:var(--font-display)] text-4xl font-medium leading-[1.02] tracking-[-0.05em] sm:text-5xl">
+              Desenvolvimento é a ferramenta. Resolver é o trabalho.
+            </h2>
+            <div className="mt-8 max-w-2xl space-y-5 text-base leading-8 text-slate-600 lg:text-lg">
+              <p>Minha jornada em tecnologia começou pela curiosidade de entender como as coisas funcionam. Com o tempo, essa curiosidade se tornou uma forma de observar problemas, organizar caminhos e dar forma a soluções digitais.</p>
+              <p>Hoje, entre produtos autorais e desafios do ambiente profissional, conecto contexto, experiência e construção. O objetivo não é só entregar uma interface ou sistema: é criar algo que tenha motivo para existir.</p>
+            </div>
+            <div className="mt-12 space-y-7 border-l border-[#2166c9]/25 pl-6">
+              {timeline.map(([period, title, description]) => (
+                <div key={title}>
+                  <p className="font-mono text-xs text-[#2166c9]">{period}</p>
+                  <h3 className="mt-1 font-[family-name:var(--font-display)] text-xl font-semibold tracking-[-0.03em]">{title}</h3>
+                  <p className="mt-1 max-w-xl text-sm leading-6 text-slate-500">{description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-    </>
+        <div className="mx-auto mt-20 max-w-7xl">
+          <div className="flex flex-col justify-between gap-4 border-t border-[#07111f]/10 pt-6 sm:flex-row sm:items-end">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#2166c9]">Experiências em movimento</p>
+              <h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold tracking-[-0.04em]">O trabalho também acontece fora da tela.</h3>
+            </div>
+            <p className="max-w-sm text-sm leading-6 text-slate-500">Momentos que carregam a parte mais importante de construir: pessoas, responsabilidade e troca.</p>
+          </div>
+
+          <div className="mt-7 grid gap-5 md:grid-cols-2">
+            <article className="group overflow-hidden rounded-[1.5rem] bg-[#07111f] text-white">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src="/images/experience-barracred.jpg"
+                  alt="Emanuel Santos em frente à Cooperativa Barracred"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/90 via-transparent to-transparent" />
+                <p className="absolute left-5 top-5 rounded-full border border-white/20 bg-[#07111f]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[#b9d6ff] backdrop-blur">Barracred</p>
+              </div>
+              <div className="px-6 py-6">
+                <h4 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-[-0.04em]">Onde a prática ganhou responsabilidade.</h4>
+                <p className="mt-2 text-sm leading-6 text-white/65">É no contato com desafios reais que tecnologia deixa de ser só estudo e passa a gerar confiança, colaboração e impacto.</p>
+              </div>
+            </article>
+
+            <article className="group overflow-hidden rounded-[1.5rem] bg-[#10243f] text-white">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src="/images/experience-presentation.jpeg"
+                  alt="Emanuel Santos apresentando uma solução digital"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-[center_35%] transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#10243f]/90 via-transparent to-transparent" />
+                <p className="absolute left-5 top-5 rounded-full border border-white/20 bg-[#10243f]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[#b9d6ff] backdrop-blur">Compartilhar</p>
+              </div>
+              <div className="px-6 py-6">
+                <h4 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-[-0.04em]">Boas ideias também precisam ser explicadas.</h4>
+                <p className="mt-2 text-sm leading-6 text-white/65">Construir é só parte do caminho. Ouvir, apresentar e transformar uma solução em conversa também faz parte do produto.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projetos" className="bg-[#eaf1fb] px-6 py-24 lg:px-10 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#2166c9]">Produtos selecionados</p>
+            <h2 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-medium leading-[1.02] tracking-[-0.05em] sm:text-6xl">Três formas de transformar uma pergunta em produto.</h2>
+          </div>
+          <div className="mt-16 grid gap-5 lg:grid-cols-3">
+            {projects.map((project) => (
+              <article key={project.title} className={`group flex min-h-[31rem] flex-col overflow-hidden rounded-[1.75rem] border border-[#07111f]/10 bg-[#fdfdfb] ${project.featured ? "lg:col-span-2 lg:grid lg:grid-cols-2" : ""}`}>
+                {project.featured && (
+                  <div className="relative min-h-64 overflow-hidden bg-[#07111f] lg:order-2 lg:min-h-full">
+                    <Image src={project.image!} alt="Tela do projeto Rotas Inteligentes" fill sizes="(max-width: 1024px) 100vw, 35vw" className="object-cover object-top transition duration-500 group-hover:scale-105" />
+                  </div>
+                )}
+                {project.image && !project.featured && (
+                  <div className="relative aspect-[16/9] overflow-hidden bg-[#07111f]">
+                    <Image src={project.image} alt="Tela da plataforma Creative Lab" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover object-top transition duration-500 group-hover:scale-105" />
+                  </div>
+                )}
+                <div className="flex flex-1 flex-col p-7 lg:p-8">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs text-[#2166c9]">{project.number}</span>
+                    <span className="rounded-full border border-[#07111f]/10 px-3 py-1 text-[11px] text-slate-500">{project.featured ? "Projeto autoral" : "Em foco"}</span>
+                  </div>
+                  <div className="mt-auto pt-16">
+                    <h3 className="font-[family-name:var(--font-display)] text-3xl font-semibold tracking-[-0.045em]">{project.title}</h3>
+                    <p className="mt-4 text-lg leading-7 text-[#07111f]">{project.summary}</p>
+                    <p className="mt-5 text-sm leading-6 text-slate-600">{project.description}</p>
+                    <p className="mt-5 border-l-2 border-[#2166c9] pl-3 text-xs leading-5 text-slate-500">{project.role}</p>
+                    <a href={project.href} target={project.href.startsWith("http") ? "_blank" : undefined} rel={project.href.startsWith("http") ? "noreferrer" : undefined} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#2166c9] transition group-hover:gap-3">
+                      {project.title === "Creative Lab" ? "Acompanhar o projeto" : "Ver protótipo"} <ArrowUpRight size={16} />
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CreationLenses />
+
+      <section id="contato" className="bg-[#07111f] px-6 py-24 text-white lg:px-10 lg:py-32">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-end">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#79aef4]">Vamos começar por uma conversa</p>
+            <h2 className="mt-5 max-w-3xl font-[family-name:var(--font-display)] text-4xl font-medium leading-[1.02] tracking-[-0.055em] sm:text-6xl">Tem um problema que merece uma boa solução?</h2>
+          </div>
+          <div className="space-y-4">
+            <a href="mailto:emanuelsantossouzajesus@gmail.com" className="flex items-center justify-between border-b border-white/20 pb-4 text-lg transition hover:border-[#79aef4] hover:text-[#79aef4]">
+              emanuelsantossouzajesus@gmail.com <Mail size={19} />
+            </a>
+            <div className="flex gap-5 pt-3 text-sm text-white/65">
+              <a className="inline-flex items-center gap-2 transition hover:text-white" href="https://github.com/emanuelsantoz" target="_blank" rel="noreferrer"><Github size={17} /> GitHub</a>
+              <a className="inline-flex items-center gap-2 transition hover:text-white" href="https://www.linkedin.com/in/emanu-ell/" target="_blank" rel="noreferrer"><Linkedin size={17} /> LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <div className="mx-auto mt-20 flex max-w-7xl items-center justify-between border-t border-white/10 pt-6 text-xs text-white/45">
+          <span>Emanuel Santos</span>
+          <span>ES/02 · 2026</span>
+        </div>
+      </section>
+    </main>
   );
 }

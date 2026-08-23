@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { HomePage } from "@/components/pages/HomePage";
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "O ecossistema digital de Emanuel Santos: explore as personas e projetos.",
+  title: "Emanuel Santos | Produtos digitais para problemas reais",
+  description:
+    "Emanuel Santos cria produtos digitais que transformam problemas reais em experiências claras, úteis e sustentáveis.",
 };
 
 export default function Home() {
