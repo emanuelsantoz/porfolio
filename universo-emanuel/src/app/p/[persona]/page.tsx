@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { HomePage } from "@/components/pages/HomePage";
+import { UxUniversePage } from "@/components/pages/UxUniversePage";
 import { getPersonaInfo, isPersonaType } from "@/core/personas/personas";
 
 type Props = {
@@ -33,6 +33,7 @@ export function generateMetadata({ params }: Props): Metadata {
 
 export default function PersonaPage({ params }: Props) {
   if (!isPersonaType(params.persona)) notFound();
-  return <HomePage initialPersona={params.persona} />;
+  if (params.persona !== "ux-ui") notFound();
+  return <UxUniversePage />;
 }
 

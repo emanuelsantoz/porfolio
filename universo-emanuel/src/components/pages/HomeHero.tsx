@@ -80,7 +80,7 @@ export function HomeHero() {
         <div className="hidden items-center gap-7 text-sm text-white/75 md:flex">
           <a className="transition hover:text-white" href="#historia">História</a>
           <a className="transition hover:text-white" href="#projetos">Projetos</a>
-          <a className="transition hover:text-white" href="#lentes">Personas</a>
+          <a className="transition hover:text-white" href="#universos">Universos</a>
           <a className="transition hover:text-white" href="#contato">Contato</a>
         </div>
         <a href="#contato" className="rounded-full border border-white/25 px-4 py-2 text-xs font-medium transition hover:border-white hover:bg-white hover:text-[#07111f]">
@@ -96,7 +96,7 @@ export function HomeHero() {
             transition={{ delay: 0.25, duration: 0.6 }}
             className="mb-7 font-mono text-xs uppercase tracking-[0.24em] text-[#79aef4]"
           >
-            ES/02 · Produtos digitais com intenção
+            ES/0 · Produtos digitais com intenção
           </motion.p>
           <h1 className="max-w-4xl font-[family-name:var(--font-display)] text-5xl font-medium leading-[0.98] tracking-[-0.065em] sm:text-6xl lg:text-8xl">
             {headline.map((word, index) => (

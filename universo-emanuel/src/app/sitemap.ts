@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/badges`, lastModified: now },
   ];
 
-  const personaRoutes: MetadataRoute.Sitemap = PERSONAS.filter((p) => p.id !== "fullstack").map((p) => ({
+  const personaRoutes: MetadataRoute.Sitemap = PERSONAS.filter((p) => p.id === "ux-ui").map((p) => ({
     url: `${siteUrl}/p/${p.id}`,
     lastModified: now,
   }));

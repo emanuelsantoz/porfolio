@@ -4,7 +4,6 @@
 
 :root {
   /* Emanuel Santos — base da marca, independente das personas. */
-  --font-display: var(--font-inter);
   --background: 36 38% 97%;
   --foreground: 214 64% 9%;
   --primary: 214 71% 46%;
