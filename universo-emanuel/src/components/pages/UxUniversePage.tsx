@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Eye, Layers3, MousePointer2, Play, Route, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Eye, MousePointer2, Route, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { UxGrid } from "@/components/personas/UxGrid";
+import { PrototypeGallery } from "@/components/pages/PrototypeGallery";
 import { usePersonaStore } from "@/core/store/personaStore";
 
 const steps = [
@@ -15,23 +15,16 @@ const steps = [
 ];
 
 export function UxUniversePage() {
-  const reduceMotion = useReducedMotion();
-  const [entering, setEntering] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const setPersona = usePersonaStore((state) => state.setPersona);
 
   useEffect(() => {
     setPersona("ux-ui");
-    const timer = window.setTimeout(() => setEntering(false), reduceMotion ? 100 : 1350);
-    return () => { window.clearTimeout(timer); setPersona("fullstack"); };
-  }, [reduceMotion, setPersona]);
+    return () => setPersona("fullstack");
+  }, [setPersona]);
 
   return <main className="min-h-screen bg-[#1E1E1E] text-[#F5F5F5]">
-    <AnimatePresence>
-      {entering && <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.4 }} className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#07111f] px-6"><motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.7 }} className="relative max-w-xl text-center"><div className="absolute left-1/2 top-1/2 -z-10 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2166c9]/30 blur-3xl" /><p className="font-mono text-xs uppercase tracking-[0.24em] text-[#79aef4]">ES/0 → UX/UI</p><p className="mt-6 font-[family-name:var(--font-display)] text-4xl font-medium leading-tight tracking-[-0.05em] sm:text-6xl">Uma ideia começa a virar interface.</p><div className="mx-auto mt-8 h-px w-40 overflow-hidden bg-white/20"><motion.div initial={{ x: "-100%" }} animate={{ x: "100%" }} transition={{ duration: reduceMotion ? 0 : 1.1, ease: "easeInOut" }} className="h-full bg-[#F24E1E]" /></div></motion.div></motion.div>}
-    </AnimatePresence>
-
-    <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-white/10 bg-[#242424]/90 px-5 backdrop-blur lg:px-8"><Link href="/" className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-white"><ArrowLeft size={16} /> <span className="hidden sm:inline">Voltar ao portal</span><span className="sm:hidden">ES/0</span></Link><div className="flex items-center gap-3"><span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#F24E1E]">UX/UI · Universo 01</span><span className="h-2 w-2 rounded-full bg-[#F24E1E]" /></div></header>
+    <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-white/10 bg-[#242424]/90 px-5 backdrop-blur lg:px-8"><Link href="/" className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-white"><ArrowLeft size={16} /> <span className="hidden sm:inline">Voltar ao portal</span><span className="sm:hidden">ES/01</span></Link><div className="flex items-center gap-3"><span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#F24E1E]">UX/UI · Universo 01</span><span className="h-2 w-2 rounded-full bg-[#F24E1E]" /></div></header>
 
     <section className="relative overflow-hidden border-b border-white/10 px-6 py-20 lg:px-10 lg:py-28" style={{ backgroundImage: "radial-gradient(circle at 80% 5%, rgba(242,78,30,.24), transparent 30%), linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px)", backgroundSize: "auto, 40px 40px, 40px 40px" }}><div className="relative mx-auto max-w-7xl"><p className="font-mono text-xs uppercase tracking-[0.22em] text-[#F24E1E]">Experiência e interface</p><h1 className="mt-6 max-w-5xl font-[family-name:var(--font-display)] text-5xl font-medium leading-[.98] tracking-[-0.06em] sm:text-7xl">Como isso pode fazer sentido para quem vai usar?</h1><p className="mt-8 max-w-2xl text-lg leading-8 text-white/68">Este não é um portfólio de telas prontas. É um espaço para mostrar como uma pergunta passa por contexto, jornada e decisão antes de virar interface.</p><a href="#processo" className="mt-10 inline-flex items-center gap-2 rounded-full bg-[#F24E1E] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#ff6538]">Ver como penso <ArrowUpRight size={17} /></a></div></section>
 
@@ -41,6 +34,6 @@ export function UxUniversePage() {
 
     <section className="border-y border-white/10 bg-[#242424] px-6 py-20 lg:px-10"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.68fr_1.32fr]"><div><Sparkles size={22} className="text-[#F24E1E]" /><p className="mt-7 font-mono text-xs uppercase tracking-[0.2em] text-[#F24E1E]">Rascunho livre</p><h2 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-medium leading-[1.02] tracking-[-0.05em]">Uma ideia pode começar torta. O importante é colocá-la em conversa.</h2><p className="mt-6 leading-7 text-white/60">O canvas continua aqui porque desenhar, apagar e reorganizar ainda é uma forma honesta de descobrir caminhos.</p><div className="mt-8 flex items-center gap-3 text-sm text-white/45"><MousePointer2 size={16} /> Clique ou toque no frame para começar.</div></div><UxGrid /></div></section>
 
-    <section className="bg-[#1E1E1E] px-6 py-20 text-center lg:px-10 lg:py-28"><div className="mx-auto max-w-3xl"><Layers3 className="mx-auto text-[#F24E1E]" size={24} /><p className="mt-7 font-mono text-xs uppercase tracking-[0.2em] text-[#F24E1E]">Em evolução</p><h2 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-medium leading-[1.02] tracking-[-0.05em] sm:text-5xl">Este universo vai receber decisões, protótipos e casos reais.</h2><p className="mt-6 text-white/60">Por enquanto, ele mostra a forma de pensar que conecta esses materiais. O próximo caso começa sempre pela pergunta certa.</p><Link href="/#projetos" className="mt-9 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm transition hover:border-white hover:bg-white hover:text-[#1E1E1E]"><Play size={15} /> Voltar aos produtos</Link></div></section>
+    <PrototypeGallery />
   </main>;
 }

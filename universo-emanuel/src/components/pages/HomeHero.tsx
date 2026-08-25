@@ -5,7 +5,7 @@ import { ArrowDownRight } from "lucide-react";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState, type MouseEvent } from "react";
 
-const headline = ["Ideias", "ganham", "força", "quando", "se", "tornam", "úteis", "para", "alguém."];
+const headline = ["Ideias", "ganham", "forma", "e", "continuam."];
 
 const perspectives = [
   { theme: "Pessoas", text: "Feito de pessoas, para pessoas." },
@@ -78,10 +78,11 @@ export function HomeHero() {
           Emanuel Santos<span className="text-[#79aef4]">.</span>
         </a>
         <div className="hidden items-center gap-7 text-sm text-white/75 md:flex">
-          <a className="transition hover:text-white" href="#historia">História</a>
-          <a className="transition hover:text-white" href="#projetos">Projetos</a>
-          <a className="transition hover:text-white" href="#universos">Universos</a>
-          <a className="transition hover:text-white" href="#contato">Contato</a>
+          <a className="portfolio-nav-link" href="#produtos">Produtos</a>
+          <a className="portfolio-nav-link" href="#trabalhos">Trabalhos</a>
+          <a className="portfolio-nav-link" href="#metodo">Método</a>
+          <a className="portfolio-nav-link" href="#historia">História</a>
+          <a className="portfolio-nav-link" href="#contato">Contato</a>
         </div>
         <a href="#contato" className="rounded-full border border-white/25 px-4 py-2 text-xs font-medium transition hover:border-white hover:bg-white hover:text-[#07111f]">
           Vamos conversar
@@ -96,7 +97,7 @@ export function HomeHero() {
             transition={{ delay: 0.25, duration: 0.6 }}
             className="mb-7 font-mono text-xs uppercase tracking-[0.24em] text-[#79aef4]"
           >
-            ES/0 · Produtos digitais com intenção
+            ES/01 · Estratégia, design e engenharia de produtos
           </motion.p>
           <h1 className="max-w-4xl font-[family-name:var(--font-display)] text-5xl font-medium leading-[0.98] tracking-[-0.065em] sm:text-6xl lg:text-8xl">
             {headline.map((word, index) => (
@@ -117,7 +118,7 @@ export function HomeHero() {
             transition={{ delay: 0.95, duration: 0.65 }}
             className="mt-8 max-w-xl text-lg leading-8 text-white/72 lg:text-xl"
           >
-            Sou Emanuel Santos. Crio produtos digitais para resolver problemas reais — da primeira pergunta até uma solução que as pessoas consigam usar e entender.
+            Sou Emanuel Santos. Uno estratégia, design e engenharia para transformar problemas pouco estruturados em produtos digitais claros, humanos e capazes de evoluir.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -126,7 +127,7 @@ export function HomeHero() {
             className="mt-10 flex flex-wrap gap-4"
           >
             <motion.a whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }} href="#projetos" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#07111f] shadow-[0_12px_32px_rgba(121,174,244,0.18)] transition hover:bg-[#dbeafe]">
-              Conhecer projetos <ArrowDownRight size={17} />
+              Ver produtos <ArrowDownRight size={17} />
             </motion.a>
             <motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }} href="#historia" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-3 text-sm font-medium text-white transition hover:border-white">
               Minha trajetória

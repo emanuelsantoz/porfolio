@@ -24,6 +24,10 @@
   --radius: 0.875rem;
 }
 
+html {
+  background: #07111f;
+}
+
 /* UX/UI Theme - Inspirado no Figma Dark Mode (Alto Contraste) */
 [data-theme="ux-ui"] {
   --background: 0 0% 12%; /* #1E1E1E (Figma Background) - Mais escuro para contraste */
@@ -109,6 +113,22 @@ body {
   @apply bg-background text-foreground transition-colors duration-500 ease-in-out;
 }
 
+.welcome-loader__grid {
+  background-image: linear-gradient(to right, rgb(121 174 244 / 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(121 174 244 / 0.09) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+.welcome-loader__glow {
+  background: radial-gradient(circle, rgb(33 102 201 / 0.24), rgb(33 102 201 / 0.07) 38%, transparent 70%);
+  filter: blur(10px);
+}
+
+html[data-universe-ready="true"] .welcome-loader {
+  display: none;
+}
+
 ::selection {
   background: #2166c9;
   color: #ffffff;
@@ -131,6 +151,78 @@ body {
   animation: hero-scan 6s ease-in-out infinite;
 }
 
+/* Interações do portfólio: luz como feedback, nunca como cursor obrigatório. */
+.portfolio-pointer-light {
+  position: fixed;
+  z-index: 40;
+  top: 0;
+  left: 0;
+  width: min(42rem, 72vw);
+  aspect-ratio: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, rgb(47 125 225 / 0.17) 0%, rgb(47 125 225 / 0.07) 28%, transparent 68%);
+  filter: blur(5px);
+  transition: opacity 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.portfolio-pointer-light[data-visible="true"] {
+  opacity: 1;
+}
+
+.portfolio-nav-link {
+  position: relative;
+  padding-block: 0.35rem;
+  color: rgb(255 255 255 / 0.72);
+  transition: color 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.portfolio-nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: #79aef4;
+  content: "";
+  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.portfolio-nav-link:hover,
+.portfolio-nav-link:focus-visible {
+  color: #ffffff;
+}
+
+.portfolio-nav-link:hover::after,
+.portfolio-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.portfolio-project {
+  position: relative;
+  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 240ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 240ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 240ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.portfolio-project:hover,
+.portfolio-project:focus-within {
+  z-index: 1;
+  transform: translateY(-6px);
+  border-color: rgb(33 102 201 / 0.55);
+  box-shadow: 0 24px 56px -30px rgb(7 17 31 / 0.38), 0 0 0 1px rgb(33 102 201 / 0.14);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-list:has(.portfolio-project:hover) .portfolio-project:not(:hover),
+  .project-list:has(.portfolio-project:focus-within) .portfolio-project:not(:focus-within) {
+    opacity: 0.58;
+    transform: scale(0.985);
+    filter: saturate(0.65);
+  }
+}
+
 @keyframes hero-grid-drift {
   from { background-position: 0 0; }
   to { background-position: 72px 72px; }
@@ -146,6 +238,20 @@ body {
   .hero-grid-motion,
   .hero-scan-line {
     animation: none;
+  }
+
+  .portfolio-pointer-light {
+    display: none;
+  }
+
+  .welcome-loader__glow {
+    filter: none;
+  }
+
+  .portfolio-project,
+  .portfolio-nav-link,
+  .portfolio-nav-link::after {
+    transition-duration: 1ms;
   }
 }
 
