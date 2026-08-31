@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { EmanuelLogo } from "@/components/brand/EmanuelLogo";
 
 const WELCOME_SEEN_KEY = "emanuel-universe-welcome-seen";
 const WELCOME_RELOADED_KEY = "emanuel-universe-welcome-reloaded";
@@ -96,7 +97,8 @@ export function WelcomeLoader() {
             initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
             transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.2, 0.8, 0.2, 1] }}
           >
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#79aef4]">ES/01 · Universo Emanuel Santos</p>
+            <EmanuelLogo tone="light" variant="full" className="mb-8 justify-center" />
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#79aef4]">ES/0 · Universo Emanuel Santos</p>
             <h1 className="mt-7 font-[family-name:var(--font-display)] text-4xl font-medium leading-[0.98] tracking-[-0.055em] sm:text-6xl">
               Bem-vindo ao Universo Emanuel Santos.
             </h1>

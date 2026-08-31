@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <title>Emanuel Santos — E em órbita</title>
+  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 61C10 45 18 25 38 18c19-7 39 2 41 19" stroke-width="6" opacity=".45"/>
+    <path d="M77 35c11 16 1 36-18 42-19 6-38-4-39-21" stroke-width="6" opacity=".85"/>
+    <path d="M31 29v38M32 29h30M32 48h21M32 67h30" stroke-width="8"/>
+  </g>
+  <circle cx="62" cy="48" r="4.5" fill="currentColor"/>
+</svg>

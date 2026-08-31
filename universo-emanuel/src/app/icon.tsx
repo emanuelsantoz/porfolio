@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { EmanuelIcon } from "@/components/brand/EmanuelIcon";
 
 export const runtime = "edge";
 
@@ -19,14 +20,11 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0b1220",
-          color: "#22c55e",
-          fontSize: 18,
-          fontWeight: 800,
-          borderRadius: 8,
+          background: "#07111f",
+          borderRadius: 9,
         }}
       >
-        UE
+        <EmanuelIcon style={{ width: 19, height: 19, color: "#79aef4" }} />
       </div>
     ),
     {

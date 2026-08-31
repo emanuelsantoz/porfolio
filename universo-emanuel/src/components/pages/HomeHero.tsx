@@ -4,8 +4,10 @@ import Image from "next/image";
 import { ArrowDownRight } from "lucide-react";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState, type MouseEvent } from "react";
+import { EmanuelLogo } from "@/components/brand/EmanuelLogo";
+import { NexusField } from "@/components/brand/NexusField";
 
-const headline = ["Ideias", "ganham", "forma", "e", "continuam."];
+const headline = ["Ideias", "ganham", "força", "quando", "se", "tornam", "úteis", "para", "alguém."];
 
 const perspectives = [
   { theme: "Pessoas", text: "Feito de pessoas, para pessoas." },
@@ -74,11 +76,12 @@ export function HomeHero() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="absolute inset-x-0 top-0 z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 text-white lg:px-10"
       >
-        <a href="#inicio" className="font-[family-name:var(--font-display)] text-lg font-semibold tracking-[-0.04em]">
-          Emanuel Santos<span className="text-[#79aef4]">.</span>
+        <a href="#inicio" aria-label="Emanuel Santos · ES/0 — início">
+          <EmanuelLogo tone="light" variant="full" className="scale-90 origin-left sm:scale-100" />
         </a>
         <div className="hidden items-center gap-7 text-sm text-white/75 md:flex">
           <a className="portfolio-nav-link" href="#produtos">Produtos</a>
+          <a className="portfolio-nav-link" href="#nexo">Como penso</a>
           <a className="portfolio-nav-link" href="#trabalhos">Trabalhos</a>
           <a className="portfolio-nav-link" href="#metodo">Método</a>
           <a className="portfolio-nav-link" href="#historia">História</a>
@@ -97,7 +100,7 @@ export function HomeHero() {
             transition={{ delay: 0.25, duration: 0.6 }}
             className="mb-7 font-mono text-xs uppercase tracking-[0.24em] text-[#79aef4]"
           >
-            ES/01 · Estratégia, design e engenharia de produtos
+            ES/0 · Desenvolvimento, conexões e produtos digitais
           </motion.p>
           <h1 className="max-w-4xl font-[family-name:var(--font-display)] text-5xl font-medium leading-[0.98] tracking-[-0.065em] sm:text-6xl lg:text-8xl">
             {headline.map((word, index) => (
@@ -118,7 +121,7 @@ export function HomeHero() {
             transition={{ delay: 0.95, duration: 0.65 }}
             className="mt-8 max-w-xl text-lg leading-8 text-white/72 lg:text-xl"
           >
-            Sou Emanuel Santos. Uno estratégia, design e engenharia para transformar problemas pouco estruturados em produtos digitais claros, humanos e capazes de evoluir.
+            Sou Emanuel Santos. Desenvolvimento é minha base. Conectar pessoas, contexto e tecnologia é como eu penso para transformar problemas reais em produtos digitais claros, humanos e capazes de evoluir.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -140,8 +143,9 @@ export function HomeHero() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           style={shouldReduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 1200 }}
-          className="relative mx-auto w-full max-w-md lg:max-w-none"
-        >
+            className="relative mx-auto w-full max-w-md lg:max-w-none"
+          >
+          <NexusField tone="dark" className="absolute -right-20 -top-16 -z-10 w-[24rem] opacity-70 lg:w-[30rem]" />
           <motion.div
             aria-hidden="true"
             animate={shouldReduceMotion ? undefined : { rotate: [0, 360] }}

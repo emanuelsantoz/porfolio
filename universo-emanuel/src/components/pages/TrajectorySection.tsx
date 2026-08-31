@@ -13,6 +13,13 @@ const timeline = [
   ["2025–hoje", "Analista de Desenvolvimento Jr.", "Atuação em sistemas internos, melhoria contínua e soluções que atendem pessoas reais."],
 ];
 
+const connectionsByTab: Record<Tab, string[]> = {
+  "História": ["Curiosidade", "Contexto", "Construção", "Continuidade"],
+  "Acadêmico": ["Conhecimento", "Fatec", "Comunidade", "Produto"],
+  "Profissional": ["Pessoas", "Responsabilidade", "Processos", "Impacto"],
+  "Pessoal": ["Exploração", "Hipóteses", "Protótipos", "Repertório"],
+};
+
 export function TrajectorySection() {
   const [active, setActive] = useState<Tab>("História");
 
@@ -37,6 +44,7 @@ export function TrajectorySection() {
             {active === "Pessoal" && <Personal />}
           </motion.div>
         </AnimatePresence>
+        <div className="mt-10 rounded-2xl border border-[#07111f]/10 bg-white/70 p-5"><p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#2166c9]">Conexões deste recorte</p><div className="mt-4 flex flex-wrap items-center gap-2">{connectionsByTab[active].map((connection, index) => <span key={connection} className="flex items-center gap-2"><span className="rounded-full bg-[#eaf1fb] px-3 py-1.5 text-xs text-[#35587f]">{connection}</span>{index < connectionsByTab[active].length - 1 && <span aria-hidden="true" className="h-px w-5 bg-[#2166c9]/35" />}</span>)}</div></div>
       </div>
     </section>
   );

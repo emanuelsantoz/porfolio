@@ -13,20 +13,20 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-displ
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "Emanuel Santos | Produtos digitais",
+    default: "ES/0 | Emanuel Santos",
     template: "%s | Emanuel Santos",
   },
-  description: "Ideias ganham forma e continuam.",
+  description: "Desenvolvimento é minha base. Conectar pessoas, contexto e tecnologia é como eu penso.",
   openGraph: {
-    title: "Emanuel Santos | Produtos digitais",
-    description: "Ideias ganham forma e continuam.",
+    title: "ES/0 | Emanuel Santos",
+    description: "Ideias ganham força quando se tornam úteis para alguém.",
     type: "website",
     locale: "pt_BR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Emanuel Santos | Produtos digitais",
-    description: "Ideias ganham forma e continuam.",
+    title: "ES/0 | Emanuel Santos",
+    description: "Ideias ganham força quando se tornam úteis para alguém.",
   },
 };
 

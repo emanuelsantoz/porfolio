@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 104" fill="none">
+  <title>Emanuel Santos</title>
+  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 20V84" stroke-width="11"/>
+    <path d="M31 20H78" stroke-width="11"/>
+    <path d="M31 52H62" stroke-width="11"/>
+    <path d="M31 84H78" stroke-width="11"/>
+    <path d="M67 52H72" stroke-width="5"/>
+  </g>
+  <circle cx="81" cy="52" r="6" fill="currentColor"/>
+  <text x="116" y="48" fill="currentColor" font-family="Space Grotesk, Arial, sans-serif" font-size="29" font-weight="650" letter-spacing="1.2">EMANUEL</text>
+  <text x="117" y="74" fill="currentColor" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="500" letter-spacing="4.2">SANTOS · ES/0</text>
+</svg>
