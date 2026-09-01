@@ -160,7 +160,11 @@ export function HomeHero() {
             transition={{ delay: 0.95, duration: 0.65 }}
             className="mt-8 max-w-xl text-lg leading-8 text-white/72 lg:text-xl"
           >
+<<<<<<< HEAD
             Transformo processos confusos em soluções que as pessoas conseguem usar, entender e continuar. Desenvolvimento é uma das formas de tornar isso real.
+=======
+            Sou Emanuel Santos. <strong>Desenvolvimento de Software é minha base.</strong> Conectar pessoas, contexto e tecnologia é como eu penso para transformar problemas reais em produtos digitais claros, humanos e capazes de evoluir.
+>>>>>>> de9b0195c7f0a75f037753fd3125468315c61484
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 18 }}
