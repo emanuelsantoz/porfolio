@@ -121,7 +121,7 @@ export function HomeHero() {
             transition={{ delay: 0.95, duration: 0.65 }}
             className="mt-8 max-w-xl text-lg leading-8 text-white/72 lg:text-xl"
           >
-            Sou Emanuel Santos. Desenvolvimento é minha base. Conectar pessoas, contexto e tecnologia é como eu penso para transformar problemas reais em produtos digitais claros, humanos e capazes de evoluir.
+            Sou Emanuel Santos. <strong>Desenvolvimento de Software é minha base.</strong> Conectar pessoas, contexto e tecnologia é como eu penso para transformar problemas reais em produtos digitais claros, humanos e capazes de evoluir.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 18 }}
