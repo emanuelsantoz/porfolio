@@ -1,13 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { EmanuelLogo } from "@/components/brand/EmanuelLogo";
+import { useEffect, useRef, useState } from "react";
 
 const WELCOME_SEEN_KEY = "emanuel-universe-welcome-seen";
 const WELCOME_RELOADED_KEY = "emanuel-universe-welcome-reloaded";
 const MINIMUM_WELCOME_TIME = 1450;
-const MAXIMUM_WAIT_TIME = 3600;
+const MAXIMUM_WAIT_TIME = 7000;
 
 const preparationSteps = [
   "Organizando histórias e decisões.",
@@ -19,6 +18,7 @@ export function WelcomeLoader() {
   const reduceMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(true);
   const [step, setStep] = useState(0);
+  const finishWelcomeRef = useRef<() => void>(() => undefined);
 
   useEffect(() => {
     try {
@@ -32,6 +32,8 @@ export function WelcomeLoader() {
 
     let isCancelled = false;
     let hasFinished = false;
+    let pageIsReady = false;
+    let videoHasEnded = reduceMotion;
     const startedAt = performance.now();
     const advanceStep = window.setInterval(() => {
       setStep((currentStep) => Math.min(currentStep + 1, preparationSteps.length - 1));
@@ -58,20 +60,32 @@ export function WelcomeLoader() {
       }
     };
 
+    const completeWhenReady = () => {
+      if (!pageIsReady || !videoHasEnded) return;
+      const remainingTime = Math.max(0, (reduceMotion ? 0 : MINIMUM_WELCOME_TIME) - (performance.now() - startedAt));
+      window.setTimeout(finishWelcome, remainingTime);
+    };
+
+    finishWelcomeRef.current = () => {
+      videoHasEnded = true;
+      completeWhenReady();
+    };
+
     const waitForDocument = document.readyState === "complete"
       ? Promise.resolve()
       : new Promise<void>((resolve) => window.addEventListener("load", () => resolve(), { once: true }));
     const waitForFonts = document.fonts?.ready?.catch(() => undefined) ?? Promise.resolve();
 
     void Promise.all([waitForDocument, waitForFonts]).then(() => {
-      const remainingTime = Math.max(0, (reduceMotion ? 0 : MINIMUM_WELCOME_TIME) - (performance.now() - startedAt));
-      window.setTimeout(finishWelcome, remainingTime);
+      pageIsReady = true;
+      completeWhenReady();
     });
 
     const maximumWait = window.setTimeout(finishWelcome, reduceMotion ? 120 : MAXIMUM_WAIT_TIME);
 
     return () => {
       isCancelled = true;
+      finishWelcomeRef.current = () => undefined;
       window.clearInterval(advanceStep);
       window.clearTimeout(maximumWait);
     };
@@ -97,7 +111,20 @@ export function WelcomeLoader() {
             initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
             transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.2, 0.8, 0.2, 1] }}
           >
-            <EmanuelLogo tone="light" variant="full" className="mb-8 justify-center" />
+            <div className="mx-auto mb-8 max-w-md overflow-hidden rounded-2xl border border-white/10 bg-[#07111f] shadow-[0_24px_64px_rgba(0,0,0,0.32)]">
+              <video
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                onEnded={() => finishWelcomeRef.current()}
+                onError={() => finishWelcomeRef.current()}
+                className="aspect-video w-full object-cover"
+                aria-label="Animação de abertura Emanuel Santos"
+              >
+                <source src="/videos/emanuel-santos-abertura.mp4" type="video/mp4" />
+              </video>
+            </div>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#79aef4]">ES/0 · Universo Emanuel Santos</p>
             <h1 className="mt-7 font-[family-name:var(--font-display)] text-4xl font-medium leading-[0.98] tracking-[-0.055em] sm:text-6xl">
               Bem-vindo ao Universo Emanuel Santos.

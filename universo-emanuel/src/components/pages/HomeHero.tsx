@@ -1,26 +1,34 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDownRight } from "lucide-react";
+import { ArrowDownRight, ThumbsDown, ThumbsUp } from "lucide-react";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState, type MouseEvent } from "react";
 import { EmanuelLogo } from "@/components/brand/EmanuelLogo";
 import { NexusField } from "@/components/brand/NexusField";
 
-const headline = ["Ideias", "ganham", "força", "quando", "se", "tornam", "úteis", "para", "alguém."];
+const headline = ["Produtos", "digitais", "para", "problemas", "reais."];
 
 const perspectives = [
-  { theme: "Pessoas", text: "Feito de pessoas, para pessoas." },
-  { theme: "Construção", text: "Pessoas são o ativo mais importante de qualquer construção." },
-  { theme: "Evolução", text: "Todo processo pode melhorar. Talvez o próximo comece pelo seu." },
-  { theme: "Conhecimento", text: "Busque conhecimento. É assim que você se liberta dos padrões atuais." },
-  { theme: "Jornada", text: "O caminho importa tanto quanto o destino. Aproveite os dois." },
-  { theme: "Mudança", text: "Nunca é tarde para fazer diferente." },
+  { id: "pessoas", theme: "Pessoas", text: "Feito de pessoas, para pessoas." },
+  { id: "construcao", theme: "Construção", text: "Pessoas são o ativo mais importante de qualquer construção." },
+  { id: "evolucao", theme: "Evolução", text: "Todo processo pode melhorar. Talvez o próximo comece pelo seu." },
+  { id: "conhecimento", theme: "Conhecimento", text: "Busque conhecimento. É assim que você se liberta dos padrões atuais." },
+  { id: "jornada", theme: "Jornada", text: "O caminho importa tanto quanto o destino. Aproveite os dois." },
+  { id: "mudanca", theme: "Mudança", text: "Nunca é tarde para fazer diferente." },
 ];
+
+type Reaction = "like" | "dislike";
+type ReactionsByPerspective = Record<string, Reaction>;
+
+const REACTIONS_STORAGE_KEY = "emanuel-perspective-reactions:v1";
 
 export function HomeHero() {
   const shouldReduceMotion = useReducedMotion();
   const [perspectiveIndex, setPerspectiveIndex] = useState(0);
+  const [isPerspectivePaused, setIsPerspectivePaused] = useState(false);
+  const [reactions, setReactions] = useState<ReactionsByPerspective>({});
+  const [hasLoadedReactions, setHasLoadedReactions] = useState(false);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const springX = useSpring(pointerX, { stiffness: 110, damping: 18 });
@@ -43,23 +51,55 @@ export function HomeHero() {
   };
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || isPerspectivePaused) return;
 
     const interval = window.setInterval(() => {
       setPerspectiveIndex((current) => (current + 1) % perspectives.length);
     }, 6200);
 
     return () => window.clearInterval(interval);
-  }, [shouldReduceMotion]);
+  }, [isPerspectivePaused, shouldReduceMotion]);
+
+  useEffect(() => {
+    try {
+      const storedReactions = window.localStorage.getItem(REACTIONS_STORAGE_KEY);
+      if (storedReactions) setReactions(JSON.parse(storedReactions) as ReactionsByPerspective);
+    } catch {
+      // A experiência continua funcional mesmo se o navegador bloquear o storage.
+    } finally {
+      setHasLoadedReactions(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!hasLoadedReactions) return;
+
+    try {
+      window.localStorage.setItem(REACTIONS_STORAGE_KEY, JSON.stringify(reactions));
+    } catch {
+      // Não impedimos a interação caso o storage esteja indisponível.
+    }
+  }, [hasLoadedReactions, reactions]);
 
   const activePerspective = perspectives[perspectiveIndex];
+  const activeReaction = reactions[activePerspective.id];
+  const likeCount = activeReaction === "like" ? 1 : 0;
+
+  const showNextPerspective = () => {
+    setPerspectiveIndex((current) => (current + 1) % perspectives.length);
+  };
+
+  const registerReaction = (reaction: Reaction) => {
+    if (activeReaction) return;
+    setReactions((currentReactions) => ({ ...currentReactions, [activePerspective.id]: reaction }));
+  };
 
   return (
     <section
       id="inicio"
       onMouseMove={handlePointerMove}
       onMouseLeave={resetPointer}
-      className="hero-stage relative isolate overflow-hidden bg-[#07111f] px-6 pb-20 pt-32 text-white lg:px-10 lg:pb-28 lg:pt-40"
+      className="hero-stage relative isolate overflow-hidden bg-[#07111f] px-6 pb-16 pt-28 text-white lg:px-10 lg:pb-20 lg:pt-32"
     >
       <div className="hero-grid-motion absolute inset-0 opacity-45" />
       <motion.div
@@ -80,9 +120,8 @@ export function HomeHero() {
           <EmanuelLogo tone="light" variant="full" className="scale-90 origin-left sm:scale-100" />
         </a>
         <div className="hidden items-center gap-7 text-sm text-white/75 md:flex">
-          <a className="portfolio-nav-link" href="#produtos">Produtos</a>
-          <a className="portfolio-nav-link" href="#nexo">Como penso</a>
-          <a className="portfolio-nav-link" href="#trabalhos">Trabalhos</a>
+          <a className="portfolio-nav-link" href="#construcoes">Construções</a>
+          <a className="portfolio-nav-link" href="#nexo">Pensamento</a>
           <a className="portfolio-nav-link" href="#metodo">Método</a>
           <a className="portfolio-nav-link" href="#historia">História</a>
           <a className="portfolio-nav-link" href="#contato">Contato</a>
@@ -100,9 +139,9 @@ export function HomeHero() {
             transition={{ delay: 0.25, duration: 0.6 }}
             className="mb-7 font-mono text-xs uppercase tracking-[0.24em] text-[#79aef4]"
           >
-            ES/0 · Desenvolvimento, conexões e produtos digitais
+            Emanuel Santos · estratégia, experiência e engenharia
           </motion.p>
-          <h1 className="max-w-4xl font-[family-name:var(--font-display)] text-5xl font-medium leading-[0.98] tracking-[-0.065em] sm:text-6xl lg:text-8xl">
+          <h1 className="max-w-3xl font-[family-name:var(--font-display)] text-5xl font-medium leading-[0.98] tracking-[-0.065em] sm:text-6xl lg:text-7xl">
             {headline.map((word, index) => (
               <motion.span
                 key={`${word}-${index}`}
@@ -121,7 +160,7 @@ export function HomeHero() {
             transition={{ delay: 0.95, duration: 0.65 }}
             className="mt-8 max-w-xl text-lg leading-8 text-white/72 lg:text-xl"
           >
-            Sou Emanuel Santos. Desenvolvimento é minha base. Conectar pessoas, contexto e tecnologia é como eu penso para transformar problemas reais em produtos digitais claros, humanos e capazes de evoluir.
+            Transformo processos confusos em soluções que as pessoas conseguem usar, entender e continuar. Desenvolvimento é uma das formas de tornar isso real.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -129,11 +168,11 @@ export function HomeHero() {
             transition={{ delay: 1.08, duration: 0.65 }}
             className="mt-10 flex flex-wrap gap-4"
           >
-            <motion.a whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }} href="#projetos" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#07111f] shadow-[0_12px_32px_rgba(121,174,244,0.18)] transition hover:bg-[#dbeafe]">
-              Ver produtos <ArrowDownRight size={17} />
+            <motion.a whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }} href="#contato" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#07111f] shadow-[0_12px_32px_rgba(121,174,244,0.18)] transition hover:bg-[#dbeafe]">
+              Falar sobre um projeto <ArrowDownRight size={17} />
             </motion.a>
-            <motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }} href="#historia" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-3 text-sm font-medium text-white transition hover:border-white">
-              Minha trajetória
+            <motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }} href="#construcoes" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-3 text-sm font-medium text-white transition hover:border-white">
+              Ver construções
             </motion.a>
           </motion.div>
         </div>
@@ -163,16 +202,21 @@ export function HomeHero() {
               className="aspect-[4/5] w-full object-cover object-top grayscale-[8%] transition duration-700 hover:scale-[1.025]"
             />
           </motion.div>
-          <div className="absolute -bottom-6 -left-4 h-32 w-[min(19rem,80vw)] sm:w-80">
-            <div aria-hidden="true" className="absolute inset-x-3 top-4 h-24 rounded-2xl border border-[#79aef4]/10 bg-[#0b1d34]/70 rotate-[-4deg]" />
-            <div aria-hidden="true" className="absolute inset-x-2 top-2 h-24 rounded-2xl border border-white/[0.07] bg-[#10243f]/80 rotate-[2.5deg]" />
-            <motion.button
-              type="button"
-              onClick={() => setPerspectiveIndex((current) => (current + 1) % perspectives.length)}
-              whileTap={{ scale: 0.98 }}
-              className="absolute inset-x-0 top-0 min-h-28 rounded-2xl border border-white/10 bg-[#10243f]/95 px-4 py-3 text-left shadow-2xl backdrop-blur transition hover:border-[#79aef4]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#79aef4]"
-              aria-label="Mostrar próximo pensamento"
+          <div className="absolute -bottom-10 -left-4 h-40 w-[min(19rem,80vw)] sm:w-80">
+            <div aria-hidden="true" className="absolute inset-x-3 top-4 h-32 rounded-2xl border border-[#79aef4]/10 bg-[#0b1d34]/70 rotate-[-4deg]" />
+            <div aria-hidden="true" className="absolute inset-x-2 top-2 h-32 rounded-2xl border border-white/[0.07] bg-[#10243f]/80 rotate-[2.5deg]" />
+            <motion.div
+              whileTap={{ scale: 0.99 }}
+              onMouseEnter={() => setIsPerspectivePaused(true)}
+              onMouseLeave={() => setIsPerspectivePaused(false)}
+              className="absolute inset-x-0 top-0 rounded-2xl border border-white/10 bg-[#10243f]/95 px-4 py-3 text-left shadow-2xl backdrop-blur transition hover:border-[#79aef4]/50"
             >
+              <button
+                type="button"
+                onClick={showNextPerspective}
+                className="w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#79aef4]"
+                aria-label="Mostrar próximo pensamento"
+              >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={activePerspective.text}
@@ -189,7 +233,35 @@ export function HomeHero() {
                   <p className="mt-1 text-[11px] text-white/45">{activePerspective.theme} · clique para continuar</p>
                 </motion.div>
               </AnimatePresence>
-            </motion.button>
+              </button>
+
+              <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
+                <span className="text-[11px] text-white/50">{likeCount} {likeCount === 1 ? "like" : "likes"}</span>
+                <div className="flex items-center gap-2" aria-label="Reagir a este pensamento">
+                  <button
+                    type="button"
+                    onClick={() => registerReaction("like")}
+                    disabled={Boolean(activeReaction)}
+                    aria-label="Concordo"
+                    aria-pressed={activeReaction === "like"}
+                    className={`inline-flex h-8 items-center gap-1.5 rounded-full border px-2.5 text-[11px] font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#79aef4] disabled:cursor-not-allowed ${activeReaction === "like" ? "border-[#79aef4] bg-[#2166c9] text-white" : "border-white/15 text-white/65 hover:border-[#79aef4]/60 hover:text-white disabled:opacity-45"}`}
+                  >
+                    <ThumbsUp size={13} /> Concordo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => registerReaction("dislike")}
+                    disabled={Boolean(activeReaction)}
+                    aria-label="Não concordo"
+                    aria-pressed={activeReaction === "dislike"}
+                    className={`inline-flex h-8 items-center gap-1.5 rounded-full border px-2.5 text-[11px] font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#79aef4] disabled:cursor-not-allowed ${activeReaction === "dislike" ? "border-white/40 bg-white/15 text-white" : "border-white/15 text-white/65 hover:border-white/45 hover:text-white disabled:opacity-45"}`}
+                  >
+                    <ThumbsDown size={13} /> Discordo
+                  </button>
+                </div>
+              </div>
+              {activeReaction ? <p className="mt-2 text-[10px] text-white/40">Sua reação foi registrada neste navegador.</p> : null}
+            </motion.div>
           </div>
         </motion.div>
       </div>
