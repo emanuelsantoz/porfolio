@@ -113,6 +113,11 @@ body {
   @apply bg-background text-foreground transition-colors duration-500 ease-in-out;
 }
 
+:focus-visible {
+  outline: 2px solid #2166c9;
+  outline-offset: 3px;
+}
+
 .welcome-loader__grid {
   background-image: linear-gradient(to right, rgb(121 174 244 / 0.09) 1px, transparent 1px),
     linear-gradient(to bottom, rgb(121 174 244 / 0.09) 1px, transparent 1px);

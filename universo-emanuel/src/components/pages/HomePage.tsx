@@ -3,6 +3,7 @@ import { ArrowUpRight, Github, Layers3, Linkedin, Mail } from "lucide-react";
 import { EmanuelLogo } from "@/components/brand/EmanuelLogo";
 import { HomeHero } from "@/components/pages/HomeHero";
 import { NexusSection } from "@/components/pages/NexusSection";
+import { OriginBridge } from "@/components/pages/OriginBridge";
 import { PortfolioPointerLight } from "@/components/pages/PortfolioPointerLight";
 import { TrajectorySection } from "@/components/pages/TrajectorySection";
 import { WorkShowcase, type ShowcaseItem } from "@/components/pages/WorkShowcase";
@@ -23,7 +24,7 @@ const method = [
 ];
 
 export function HomePage() {
-  return <main className="portfolio-shell bg-[#f8f7f3] text-[#07111f]"><PortfolioPointerLight /><HomeHero />
+  return <main className="portfolio-shell bg-[#f8f7f3] text-[#07111f]"><PortfolioPointerLight /><HomeHero /><OriginBridge />
     <section id="construcoes" className="bg-[#eaf1fb] px-6 py-24 lg:px-10 lg:py-32"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="Construções em movimento" title="Menos promessa. Mais contexto sobre o que já começou a resolver algo." text="A vitrine mostra produtos, sistemas e protótipos por uma pergunta simples: qual problema estava em jogo, qual decisão foi tomada e o que isso colocou em movimento." /><div className="mt-16"><WorkShowcase items={showcaseItems} /></div><aside className="mt-8 flex flex-col gap-5 rounded-[1.5rem] border border-[#07111f]/10 bg-white/70 p-6 sm:flex-row sm:items-center sm:justify-between"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#2166c9]">Iniciativa em definição</p><h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold tracking-[-0.04em]">Aegon</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Uma iniciativa que ainda está encontrando nome, proposta e relação com a marca antes de ganhar uma presença pública maior.</p></div><a href="#contato" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[#2166c9] transition hover:gap-3">Conversar sobre a iniciativa <ArrowUpRight size={16} /></a></aside></div></section>
     <NexusSection />
     <section id="metodo" className="overflow-hidden bg-[#07111f] px-6 py-24 text-white lg:px-10 lg:py-32"><div className="mx-auto max-w-7xl"><SectionHeading dark eyebrow="Método de construção" title="Clareza não é uma etapa. É o que orienta cada etapa." text="Estratégia, experiência e engenharia funcionam como partes de uma mesma construção, guiadas pelo que as pessoas precisam conseguir fazer no fim." /><ol className="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-4">{method.map((step) => <li key={step.number} className="group min-h-64 bg-[#07111f] p-7 transition hover:bg-[#0d1f37] lg:p-8"><span className="font-mono text-xs tracking-[0.2em] text-[#2f7de1]">{step.number}</span><h3 className="mt-14 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-[-0.045em]">{step.title}</h3><p className="mt-4 text-sm leading-6 text-white/63">{step.text}</p></li>)}</ol></div></section>

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { HomePage } from "@/components/pages/HomePage";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "ES/0 | Desenvolvimento e conexões",
-  description:
-    "Emanuel Santos usa desenvolvimento como base para conectar pessoas, contexto e tecnologia em produtos digitais úteis.",
+  title: "Processos claros, produtos utilizáveis",
+  description: "Emanuel Santos transforma processos confusos em produtos digitais claros, utilizáveis e capazes de evoluir.",
+  alternates: { canonical: "/" },
 };
 
 export default function Home() {
-  return <HomePage />;
+  redirect("/v3");
 }
